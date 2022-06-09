@@ -1,26 +1,26 @@
-# SRGAN-PyTorch
+# CARN-PyTorch
 
 ## Overview
 
-This repository contains an op-for-op PyTorch reimplementation of [Photo-Realistic Single Image Super-Resolution Using a Generative Adversarial Network](https://arxiv.org/abs/1609.04802v5).
+This repository contains an op-for-op PyTorch reimplementation
+of [Fast, Accurate, and Lightweight Super-Resolution with Cascading Residual Network](https://arxiv.org/abs/1803.08664v5)
+.
 
 ## Table of contents
 
-- [SRGAN-PyTorch](#srgan-pytorch)
+- [CARN-PyTorch](#carn-pytorch)
     - [Overview](#overview)
     - [Table of contents](#table-of-contents)
     - [Download weights](#download-weights)
     - [Download datasets](#download-datasets)
     - [How Test and Train](#how-test-and-train)
         - [Test](#test)
-        - [Train SRResNet model](#train-srresnet-model)
-        - [Resume train SRResNet model](#resume-train-srresnet-model)
-        - [Train SRGAN model](#train-srgan-model)
-        - [Resume train SRGAN model](#resume-train-srgan-model)
+        - [Train model](#train-model)
+        - [Resume train model](#resume-train-model)
     - [Result](#result)
     - [Contributing](#contributing)
     - [Credit](#credit)
-        - [Photo-Realistic Single Image Super-Resolution Using a Generative Adversarial Network](#photo-realistic-single-image-super-resolution-using-a-generative-adversarial-network)
+        - [Fast, Accurate, and Lightweight Super-Resolution with Cascading Residual Network](#fast-accurate-and-lightweight-super-resolution-with-cascading-residual-network)
 
 ## Download weights
 
@@ -38,75 +38,50 @@ Please refer to `README.md` in the `data` directory for the method of making a d
 
 ## How Test and Train
 
-Both training and testing only need to modify the `config.py` file. 
+Both training and testing only need to modify the `config.py` file.
 
 ### Test
 
-- line 31: `upscale_factor` change to `4`.
+- line 31: `upscale_factor` change to `2`.
 - line 33: `mode` change to `test`.
-- line 106: `model_path` change to `results/pretrained_models/SRResNet_x4-ImageNet-2096ee7f.pth.tar`.
+- line 70: `model_path` change to `results/pretrained_models/CARN_x2-DIV2K-2096ee7f.pth.tar`.
 
-### Train SRResNet model
+### Train model
 
-- line 31: `upscale_factor` change to `4`.
-- line 33: `mode` change to `train_srresnet`.
-- line 35: `exp_name` change to `SRResNet_baseline`.
+- line 31: `upscale_factor` change to `2`.
+- line 33: `mode` change to `train`.
+- line 35: `exp_name` change to `CARN_x2`.
 
-### Resume train SRResNet model
+### Resume train model
 
-- line 31: `upscale_factor` change to `4`.
-- line 33: `mode` change to `train_srresnet`.
-- line 35: `exp_name` change to `SRResNet_baseline`.
-- line 49: `resume` change to `samples/SRResNet_baseline/g_epoch_xxx.pth.tar`.
-
-### Train SRGAN model
-
-- line 31: `upscale_factor` change to `4`.
-- line 33: `mode` change to `train_srgan`.
-- line 35: `exp_name` change to `SRGAN_baseline`.
-- line 73: `resume` change to `results/SRResNet_baseline/g_last.pth.tar`.
-
-### Resume train SRGAN model
-
-- line 31: `upscale_factor` change to `4`.
-- line 33: `mode` change to `train_srgan`.
-- line 35: `exp_name` change to `SRGAN_baseline`.
-- line 73: `resume` change to `results/SRResNet_baseline/g_last.pth.tar`.
-- line 74: `resume_d` change to `samples/SRGAN_baseline/g_epoch_xxx.pth.tar`.
-- line 75: `resume_g` change to `samples/SRGAN_baseline/g_epoch_xxx.pth.tar`.
+- line 31: `upscale_factor` change to `2`.
+- line 33: `mode` change to `train`.
+- line 35: `exp_name` change to `CARN_x2`.
+- line 48: `resume` change to `samples/CARN_x2/epoch_xxx.pth.tar`.
 
 ## Result
 
-Source of original paper results: [https://arxiv.org/pdf/1609.04802v5.pdf](https://arxiv.org/pdf/1609.04802v5.pdf)
+Source of original paper results: [https://arxiv.org/pdf/1803.08664v5.pdf](https://arxiv.org/pdf/1803.08664v5.pdf)
 
 In the following table, the psnr value in `()` indicates the result of the project, and `-` indicates no test.
 
-| Set5 | Scale |      SRResNet      |       SRGAN        |
-|:----:|:-----:|:------------------:|:------------------:|
-| PSNR |   4   |  32.05(**32.16**)  |  29.40(**29.08**)  |
-| SSIM |   4   | 0.9019(**0.8961**) | 0.8472(**0.8305**) |
-
-| Set14 | Scale |      SRResNet      |       SRGAN        |
-|:-----:|:-----:|:------------------:|:------------------:|
-| PSNR  |   4   |  28.49(**28.62**)  |  26.02(**25.89**)  |
-| SSIM  |   4   | 0.8184(**0.7831**) | 0.7397(**0.6932**) |
-
-| BSD100 | Scale |      SRResNet      |       SRGAN        |
-|:------:|:-----:|:------------------:|:------------------:|
-|  PSNR  |   4   |  27.58(**27.59**)  |  25.16(**24.91**)  |
-|  SSIM  |   4   | 0.7620(**0.7379**) | 0.6688(**0.6354**) |
+|  Method  | Scale |          Set5 (PSNR/SSIM)           |          Set14 (PSNR/SSIM)          |         BSD100 (PSNR/SSIM)          |        Urban100 (PSNR/SSIM)         |
+|:--------:|:-----:|:-----------------------------------:|:-----------------------------------:|:-----------------------------------:|:-----------------------------------:|
+|   CARN   |   2   | 37.76(**38.17**)/0.9590(**0.9618**) | 33.52(**33.83**)/0.9166(**0.9204**) | 32.09(**32.27**)/0.8978(**0.9017**) | 31.92(**32.64**)/0.9256(**0.9332**) |
+|   CARN   |   3   | 34.29(**34.50**)/0.9255(**0.9287**) | 30.29(**30.29**)/0.8407(**0.8415**) | 29.06(**29.09**)/0.8034(**0.8066**) | 28.06(**28.29**)/0.8493(**0.8557**) |
+|   CARN   |   4   | 32.13(**32.36**)/0.8937(**0.8979**) | 28.60(**28.65**)/0.7806(**0.7836**) | 27.58(**27.61**)/0.7349(**0.7388**) | 26.07(**26.31**)/0.7837(**0.7929**) |
 
 ```bash
-# Download `SRGAN_x4-ImageNet-c71a4860.pth.tar` weights to `./results/pretrained_models`
+# Download `CARN_x2-DIV2K-2096ee7f.pth.tar` weights to `./results/pretrained_models`
 # More detail see `README.md<Download weights>`
-python ./inference.py --inputs_path ./figure/comic_lr.png --output_path ./figure/comic_sr.png --weights_path ./results/pretrained_models/SRGAN_x4-ImageNet-c71a4860.pth.tar
+python ./inference.py --inputs_path ./figure/comic_lr.png --output_path ./figure/comic_sr.png --weights_path ./results/pretrained_models/CARN_x2-DIV2K-2096ee7f.pth.tar
 ```
 
-Input: 
+Input:
 
 <span align="center"><img width="240" height="360" src="figure/comic_lr.png"/></span>
 
-Output: 
+Output:
 
 <span align="center"><img width="240" height="360" src="figure/comic_sr.png"/></span>
 
@@ -118,38 +93,37 @@ SR image save to `./figure/comic_sr.png`
 
 ## Contributing
 
-If you find a bug, create a GitHub issue, or even better, submit a pull request. Similarly, if you have questions, simply post them as GitHub issues.
+If you find a bug, create a GitHub issue, or even better, submit a pull request. Similarly, if you have questions,
+simply post them as GitHub issues.
 
 I look forward to seeing what the community does with these models!
 
 ## Credit
 
-### Photo-Realistic Single Image Super-Resolution Using a Generative Adversarial Network
+### Fast, Accurate, and Lightweight Super-Resolution with Cascading Residual Network
 
-_Christian Ledig, Lucas Theis, Ferenc Huszar, Jose Caballero, Andrew Cunningham, Alejandro Acosta, Andrew Aitken, Alykhan Tejani, Johannes Totz, Zehan
-Wang, Wenzhe Shi_ <br>
+_Namhyuk Ahn, Byungkon Kang, Kyung-Ah Sohn_ <br>
 
 **Abstract** <br>
-Despite the breakthroughs in accuracy and speed of single image super-resolution using faster and deeper convolutional neural networks, one central
-problem remains largely unsolved: how do we recover the finer texture details when we super-resolve at large upscaling factors? The behavior of
-optimization-based super-resolution methods is principally driven by the choice of the objective function. Recent work has largely focused on
-minimizing the mean squared reconstruction error. The resulting estimates have high peak signal-to-noise ratios, but they are often lacking
-high-frequency details and are perceptually unsatisfying in the sense that they fail to match the fidelity expected at the higher resolution. In this
-paper, we present SRGAN, a generative adversarial network (GAN) for image super-resolution (SR). To our knowledge, it is the first framework capable
-of inferring photo-realistic natural images for 4x upscaling factors. To achieve this, we propose a perceptual loss function which consists of an
-adversarial loss and a content loss. The adversarial loss pushes our solution to the natural image manifold using a discriminator network that is
-trained to differentiate between the super-resolved images and original photo-realistic images. In addition, we use a content loss motivated by
-perceptual similarity instead of similarity in pixel space. Our deep residual network is able to recover photo-realistic textures from heavily
-downsampled images on public benchmarks. An extensive mean-opinion-score (MOS) test shows hugely significant gains in perceptual quality using SRGAN.
-The MOS scores obtained with SRGAN are closer to those of the original high-resolution images than to those obtained with any state-of-the-art method.
+. In recent years, deep learning methods have been successfully applied to single-image super-resolution tasks. Despite
+their great performances, deep learning methods cannot be easily applied to realworld applications due to the
+requirement of heavy computation. In this paper, we address this issue by proposing an accurate and lightweight deep
+network for image super-resolution. In detail, we design an architecture that implements a cascading mechanism upon a
+residual network. We also present variant models of the proposed cascading residual network to further improve
+efficiency. Our extensive experiments show that even with much fewer parameters and operations, our models achieve
+performance comparable to that of state-of-the-art methods.
 
-[[Paper]](https://arxiv.org/pdf/1609.04802v5.pdf)
+[[Paper]](https://arxiv.org/pdf/1803.08664v5.pdf)
 
 ```bibtex
-@InProceedings{srgan,
-    author = {Christian Ledig, Lucas Theis, Ferenc Huszar, Jose Caballero, Andrew Cunningham, Alejandro Acosta, Andrew Aitken, Alykhan Tejani, Johannes Totz, Zehan Wang, Wenzhe Shi},
-    title = {Photo-Realistic Single Image Super-Resolution Using a Generative Adversarial Network},
-    booktitle = {arXiv},
-    year = {2016}
+@article{DBLP:journals/corr/abs-1803-08664,
+  author    = {Namhyuk Ahn and
+               Byungkon Kang and
+               Kyung{-}Ah Sohn},
+  title     = {Fast, Accurate, and, Lightweight Super-Resolution with Cascading Residual
+               Network},
+  journal   = {CoRR},
+  volume    = {abs/1803.08664},
+  year      = {2018}
 }
 ```
