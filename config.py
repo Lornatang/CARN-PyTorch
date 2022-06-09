@@ -47,15 +47,15 @@ if mode == "train":
     # Incremental training and migration training
     resume = ""
 
-    # Total num epochs
-    epochs = 310
+    # Total num epochs (600,000 iters)
+    epochs = 1234
 
     # Optimizer parameter
     model_lr = 1e-4
     model_betas = (0.9, 0.999)
 
-    # Dynamically adjust the learning rate policy
-    lr_scheduler_milestones = [206]
+    # Dynamically adjust the learning rate policy (400,000 iters)
+    lr_scheduler_milestones = [int(epochs * 0.667)]
     lr_scheduler_gamma = 0.5
 
     # How many iterations to print the training result

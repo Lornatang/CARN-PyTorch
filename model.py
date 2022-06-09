@@ -123,7 +123,7 @@ class CARN(nn.Module):
 
         self.exit = nn.Conv2d(64, 3, (3, 3), (1, 1), (1, 1))
 
-        self.register_buffer("mean", torch.Tensor([0.4488, 0.4371, 0.4040]).view(1, 3, 1, 1))
+        self.register_buffer("mean", torch.Tensor([0.4563, 0.4402, 0.4056]).view(1, 3, 1, 1))
 
         # Initialize neural network weights
         self._initialize_weights()
