@@ -28,7 +28,7 @@ cudnn.benchmark = True
 # When evaluating the performance of the SR model, whether to verify only the Y channel image data
 only_test_y_channel = True
 # Image magnification factor
-upscale_factor = 4
+upscale_factor = 2
 # Current configuration parameter method
 mode = "train"
 # Experiment name, easy to save weights and log files
