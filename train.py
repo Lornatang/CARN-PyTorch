@@ -100,6 +100,9 @@ def main():
         psnr, ssim = validate(model, test_prefetcher, epoch, writer, psnr_model, ssim_model, "Test")
         print("\n")
 
+        # Update LR
+        scheduler.step()
+
         # Automatically save the model with the highest index
         is_best = psnr > best_psnr and ssim > best_ssim
         best_psnr = max(psnr, best_psnr)
