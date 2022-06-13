@@ -65,16 +65,16 @@ Source of original paper results: [https://arxiv.org/pdf/1803.08664v5.pdf](https
 
 In the following table, the psnr value in `()` indicates the result of the project, and `-` indicates no test.
 
-|  Method  | Scale |      Set5 (PSNR/SSIM)      |     Set14 (PSNR/SSIM)      |     BSD100 (PSNR/SSIM)     |    Urban100 (PSNR/SSIM)    |
-|:--------:|:-----:|:--------------------------:|:--------------------------:|:--------------------------:|:--------------------------:|
-|   CARN   |   2   | 37.76(**-**)/0.9590(**-**) | 33.52(**-**)/0.9166(**-**) | 32.09(**-**)/0.8978(**-**) | 31.92(**-**)/0.9256(**-**) |
-|   CARN   |   3   | 34.29(**-**)/0.9255(**-**) | 30.29(**-**)/0.8407(**-**) | 29.06(**-**)/0.8034(**-**) | 28.06(**-**)/0.8493(**-**) |
-|   CARN   |   4   | 32.13(**-**)/0.8937(**-**) | 28.60(**-**)/0.7806(**-**) | 27.58(**-**)/0.7349(**-**) | 26.07(**-**)/0.7837(**-**) |
+| Method | Scale |          Set5 (PSNR/SSIM)           |          Set14 (PSNR/SSIM)          |         BSD100 (PSNR/SSIM)          |        Urban100 (PSNR/SSIM)         |
+|:------:|:-----:|:-----------------------------------:|:-----------------------------------:|:-----------------------------------:|:-----------------------------------:|
+|  CARN  |   2   | 37.76(**37.80**)/0.9590(**0.9605**) | 33.52(**33.34**)/0.9166(**0.9159**) | 32.09(**32.04**)/0.8978(**0.8988**) | 31.92(**31.48**)/0.9256(**0.9220**) |
+|  CARN  |   3   |     34.29(**-**)/0.9255(**-**)      |     30.29(**-**)/0.8407(**-**)      |     29.06(**-**)/0.8034(**-**)      |     28.06(**-**)/0.8493(**-**)      |
+|  CARN  |   4   |     32.13(**-**)/0.8937(**-**)      |     28.60(**-**)/0.7806(**-**)      |     27.58(**-**)/0.7349(**-**)      |     26.07(**-**)/0.7837(**-**)      |
 
 ```bash
-# Download `CARN_x2-DIV2K-2096ee7f.pth.tar` weights to `./results/pretrained_models`
+# Download `CARN_x2-DIV2K-4797e51b.pth.tar` weights to `./results/pretrained_models`
 # More detail see `README.md<Download weights>`
-python ./inference.py --inputs_path ./figure/comic_lr.png --output_path ./figure/comic_sr.png --weights_path ./results/pretrained_models/CARN_x2-DIV2K-2096ee7f.pth.tar
+python ./inference.py --inputs_path ./figure/comic_lr.png --output_path ./figure/comic_sr.png --weights_path ./results/pretrained_models/CARN_x2-DIV2K-4797e51b.pth.tar
 ```
 
 Input:
@@ -86,8 +86,8 @@ Output:
 <span align="center"><img width="240" height="360" src="figure/comic_sr.png"/></span>
 
 ```text
-Build SRGAN model successfully.
-Load SRGAN model weights `./results/pretrained_models/SRGAN_x4-ImageNet-c71a4860.pth.tar` successfully.
+Build CARN model successfully.
+Load CARN model weights `./results/pretrained_models/CARN_x2-DIV2K-4797e51b.pth.tar` successfully.
 SR image save to `./figure/comic_sr.png`
 ```
 
